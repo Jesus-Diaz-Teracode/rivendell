@@ -15,6 +15,7 @@ func Create(db *gorm.DB) *gin.Engine {
 	r.GET("/database/ping", h.HandlePingDatabase)
 
 	r.POST("/users", h.CreateUser)
+	r.GET("/users", h.ListUsers)
 
 	return r
 }
