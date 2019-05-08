@@ -22,8 +22,5 @@ func (h *Handler) HandlePingDatabase(c *gin.Context) {
 		return
 	}
 
-	c.JSON(
-		http.StatusOK,
-		gin.H{"message": "pong"},
-	)
+	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
