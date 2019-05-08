@@ -1,0 +1,29 @@
+---
+version: '3'
+services:
+  cockroach:
+    image: cockroachdb/cockroach:v2.0.6
+    container_name: cockroach
+    hostname: cockroach
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - rivendell
+    ports:
+      - "26267:26257"
+      - "8090:8080"
+    volumes:
+      - cockroach-data:/cockroach/cockroach-data
+    command:
+      - start
+      - --insecure
+
+volumes:
+  cockroach-data:
+
+networks:
+  rivendell:
+    driver: bridge
