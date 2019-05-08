@@ -2,9 +2,7 @@ package models
 
 // User is the main model
 type User struct {
-	ID        int64  `gorm:"primary_key"`
-	FirstName string `gorm:"not null"`
-	LastName  string `gorm:"not null"`
-	Email     string `gorm:"unique_index;not null"`
-	Name      string
+	FirstName string `gorm:"not null" json:"first_name"`
+	LastName  string `gorm:"not null" json:"last_name"`
+	Email     string `gorm:"not null" json:"email"`
 }
