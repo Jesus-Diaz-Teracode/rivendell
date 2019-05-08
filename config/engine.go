@@ -1,4 +1,4 @@
-package router
+package config
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,8 +6,8 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-// Create a router engine
-func Create(db *gorm.DB) *gin.Engine {
+// CreateEngine creates and configure the engine
+func CreateEngine(db *gorm.DB) *gin.Engine {
 	r := gin.Default()
 	h := &handlers.Handler{Db: db}
 

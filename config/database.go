@@ -1,4 +1,4 @@
-package database
+package config
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 
 // Connect creates a new connection with database
 // and return a db instance
-func Connect() (*gorm.DB, error) {
+func CreateDatabase() (*gorm.DB, error) {
 	dbHost := "localhost"
 	dbPort := "26267"
 	dbName := "example_gorm"
