@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/jedi4z/rivendell/models"
 	"github.com/jinzhu/gorm"
@@ -9,19 +10,15 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Connect creates a new connection with database
-// and return a db instance
+// CreateDatabase creates a new connection with
+// database and return a db instance
 func CreateDatabase() (*gorm.DB, error) {
-	dbHost := "localhost"
-	dbPort := "26267"
-	dbName := "example_gorm"
-	dbSsl := "disable"
 	connString := fmt.Sprintf(
 		"postgresql://root@%s:%s/%s?sslmode=%s",
-		dbHost,
-		dbPort,
-		dbName,
-		dbSsl,
+		os.Getenv("DATABASE_HOST"),
+		os.Getenv("DATABASE_PORT"),
+		os.Getenv("DATABASE_NAME"),
+		os.Getenv("DATABASE_SSL"),
 	)
 
 	db, err := gorm.Open("postgres", connString)
@@ -29,7 +26,7 @@ func CreateDatabase() (*gorm.DB, error) {
 		return nil, errors.Wrap(err, "Is not posible connect with database")
 	}
 
-	sql := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", dbName)
+	sql := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", os.Getenv("DATABASE_NAME"))
 
 	err = db.Exec(sql).Error
 	if err != nil {
